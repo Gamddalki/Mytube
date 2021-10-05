@@ -14,5 +14,10 @@
   "homepage": "https://github.com/Gamddalki/Mytube#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6"
   }
 }
