@@ -2,15 +2,17 @@
   "name": "mytube",
   "version": "1.0.0",
   "description": "The best way to enjoy videos.",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Gamddalki/Mytube.git"
   },
   "author": "Hannah Kim<hannahk01@naver.com>",
-  "license": "MIT",
+  "license": "EH",
   "bugs": {
     "url": "https://github.com/Gamddalki/Mytube/issues"
   },
-  "homepage": "https://github.com/Gamddalki/Mytube#readme"
+  "homepage": "https://github.com/Gamddalki/Mytube#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
