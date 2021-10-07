@@ -1,9 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 
-import globalRouter from "../routers/globalRouter";
-import usersRouter from "../routers/usersRouter";
-import videosRouter from "../routers/videosRouter";
+import globalRouter from "./routers/globalRouter";
+import usersRouter from "./routers/usersRouter";
+import videosRouter from "./routers/videosRouter";
 
 const PORT = 6104;
 

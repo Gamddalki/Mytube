@@ -5,7 +5,7 @@
 /login
 /search
 
-/users/profile
+/users/edit
 /users/delete
 
 /videos/watch
