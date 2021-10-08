@@ -4,9 +4,9 @@ import { watch, edit, remove, upload } from "../controllers/videosController";
 
 const videosRouter = express.Router();
 
+videosRouter.get("/:id(\\d+)", watch);
+videosRouter.get("/:id(\\d+)/edit", edit);
+videosRouter.get("/:id(\\d+)/delete", remove);
 videosRouter.get("/upload", upload);
-videosRouter.get("/:id", watch);
-videosRouter.get("/:id/edit", edit);
-videosRouter.get("/:id/delete", remove);
 
 export default videosRouter;
