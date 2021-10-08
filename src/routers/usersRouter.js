@@ -1,7 +1,6 @@
 import express from "express";
 
-import { edit } from "../controllers/usersController";
-import { leave } from "../controllers/usersController";
+import { edit, leave } from "../controllers/usersController";
 
 const usersRouter = express.Router();
 
