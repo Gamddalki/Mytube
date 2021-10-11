@@ -35,7 +35,7 @@ export const search = (req, res) => {
 export const watch = (req, res) => {
   const { id } = req.params;
   const video = videos[id - 1];
-  return res.render("watch", { pageTitle: `Watch | ${video.title}` });
+  return res.render("watch", { pageTitle: `Watch | ${video.title}`, video });
 };
 
 export const edit = (req, res) => res.send("Videos Edit");
