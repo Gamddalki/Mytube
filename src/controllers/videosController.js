@@ -30,7 +30,7 @@ export const home = (req, res) => {
 };
 
 export const search = (req, res) => {
-  res.send("Videos Watch");
+  res.send("Videos Search");
 };
 export const watch = (req, res) => {
   const { id } = req.params;
@@ -38,6 +38,16 @@ export const watch = (req, res) => {
   return res.render("watch", { pageTitle: `Watch | ${video.title}`, video });
 };
 
-export const edit = (req, res) => res.send("Videos Edit");
+export const edit = (req, res) => {
+  const { id } = req.params;
+  const video = videos[id - 1];
+  return res.render("edit", { pageTitle: `Edit | ${video.title}`, video });
+};
+
+export const editPost = (req, res) => {
+  const { id } = req.params;
+  return res.redirect(`/videos/${id}`);
+};
+
 export const remove = (req, res) => res.send("Videos Remove");
 export const upload = (req, res) => res.send("Videos Upload");
