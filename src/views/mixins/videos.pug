@@ -1,6 +1,7 @@
 mixin videos(video)
     div 
-        h4=video.title
+        h4
+            a(href=`/videos/${video.id}`)=video.title
         ul
             li  #{video.likes}
             li #{video.comments}

@@ -25,11 +25,19 @@ const videos = [
   },
 ];
 
-export const home = (req, res) =>
-  res.render("home", { pageTitle: "Home", videos });
+export const home = (req, res) => {
+  return res.render("home", { pageTitle: "Home", videos });
+};
 
-export const search = (req, res) => res.send("Videos Search");
-export const watch = (req, res) => res.send("Videos Watch");
+export const search = (req, res) => {
+  res.send("Videos Watch");
+};
+export const watch = (req, res) => {
+  const { id } = req.params;
+  const video = videos[id - 1];
+  return res.render("watch", { pageTitle: `Watch | ${video.title}` });
+};
+
 export const edit = (req, res) => res.send("Videos Edit");
 export const remove = (req, res) => res.send("Videos Remove");
 export const upload = (req, res) => res.send("Videos Upload");
