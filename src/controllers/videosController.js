@@ -52,4 +52,20 @@ export const editPost = (req, res) => {
 };
 
 export const remove = (req, res) => res.send("Videos Remove");
-export const upload = (req, res) => res.send("Videos Upload");
+
+export const upload = (req, res) => {
+  return res.render("upload", { pageTitle: "Upload" });
+};
+
+export const uploadPost = (req, res) => {
+  const newVideo = {
+    title: req.body.title,
+    likes: 0,
+    comments: 0,
+    createdAt: "0 minutes ago",
+    views: 0,
+    id: videos.length + 1,
+  };
+  videos.push(newVideo);
+  return res.redirect("/");
+};
