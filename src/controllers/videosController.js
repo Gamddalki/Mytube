@@ -11,19 +11,34 @@ export const search = (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
-  if (video) {
-    return res.render("watch", { pageTitle: `Watch | ${video.title}`, video });
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found" });
   }
-  return res.render("404", { pageTitle: "Video not found" });
+  return res.render("watch", { pageTitle: `Watch | ${video.title}`, video });
 };
 
-export const edit = (req, res) => {
+export const edit = async (req, res) => {
   const { id } = req.params;
-  return res.render("edit", { pageTitle: `Edit | ` });
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found" });
+  }
+  return res.render("edit", { pageTitle: `Edit | ${video.title}`, video });
 };
 
-export const editPost = (req, res) => {
+export const editPost = async (req, res) => {
   const { id } = req.params;
+  const { title, description, hashtag } = req.body;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found" });
+  }
+  video.title = title;
+  video.description = description;
+  video.hashtag = hashtag
+    .split(",")
+    .map((word) => (!word.startsWith("#") ? `#${word}` : word));
+  await video.save();
   return res.redirect(`/videos/${id}`);
 };
 
@@ -40,10 +55,8 @@ export const uploadPost = async (req, res) => {
       title,
       description,
       hashtag: hashtag
-        .split(" ")
-        .map((word) =>
-          !word.trim().startsWith("#") ? `#${word.trim()}` : word.trim()
-        ),
+        .split(",")
+        .map((word) => (!word.startsWith("#") ? `#${word}` : word)),
     });
     return res.redirect("/");
   } catch (error) {
