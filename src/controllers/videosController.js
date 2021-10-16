@@ -29,16 +29,17 @@ export const edit = async (req, res) => {
 export const editPost = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtag } = req.body;
-  const video = await Video.findById(id);
+  const video = await Video.exists({ _id: id });
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
-  video.title = title;
-  video.description = description;
-  video.hashtag = hashtag
-    .split(",")
-    .map((word) => (!word.startsWith("#") ? `#${word}` : word));
-  await video.save();
+  await Video.findByIdAndUpdate(id, {
+    title,
+    description,
+    hashtag: hashtag
+      .split(",")
+      .map((word) => (!word.startsWith("#") ? `#${word}` : word)),
+  });
   return res.redirect(`/videos/${id}`);
 };
 
