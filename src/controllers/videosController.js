@@ -31,16 +31,17 @@ export const upload = (req, res) => {
 
 export const uploadPost = async (req, res) => {
   const { title, description, hashtag } = req.body;
-  const video = new Video({
-    title,
-    description,
-    createdAt: Date.now(),
-    hashtag: hashtag.split(" ").map((word) => `#${word}`),
-    meta: {
-      views: 0,
-      likes: 0,
-    },
-  });
-  await video.save();
-  return res.redirect("/");
+  try {
+    await Video.create({
+      title,
+      description,
+      hashtag: hashtag.split(" ").map((word) => `#${word}`),
+    });
+    return res.redirect("/");
+  } catch (error) {
+    return res.render("upload", {
+      pageTitle: "Upload",
+      errorMessage: error._message,
+    });
+  }
 };
