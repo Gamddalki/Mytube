@@ -1,8 +1,8 @@
 import Video from "../models/Video";
 
-export const home = (req, res) => {
-  Video.find({}, (error, videos) => {});
-  return res.render("home", { pageTitle: "Home" });
+export const home = async (req, res) => {
+  const videos = await Video.find({});
+  return res.render("home", { pageTitle: "Home", videos });
 };
 
 export const search = (req, res) => {
@@ -30,5 +30,17 @@ export const upload = (req, res) => {
 };
 
 export const uploadPost = (req, res) => {
+  const { title, description, hashtag } = req.body;
+  const video = new Video({
+    title,
+    description,
+    createdAt: Date.now(),
+    hashtag: hashtag.split(" ").map((word) => `#${word}`),
+    meta: {
+      views: 0,
+      likes: 0,
+    },
+  });
+  console.log(video);
   return res.redirect("/");
 };
