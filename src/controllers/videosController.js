@@ -29,7 +29,7 @@ export const upload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload" });
 };
 
-export const uploadPost = (req, res) => {
+export const uploadPost = async (req, res) => {
   const { title, description, hashtag } = req.body;
   const video = new Video({
     title,
@@ -41,6 +41,6 @@ export const uploadPost = (req, res) => {
       likes: 0,
     },
   });
-  console.log(video);
+  await video.save();
   return res.redirect("/");
 };
