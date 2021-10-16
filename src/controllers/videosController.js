@@ -32,11 +32,16 @@ export const upload = (req, res) => {
 export const uploadPost = async (req, res) => {
   const { title, description, hashtag } = req.body;
   try {
-    await Video.create({
+    const video = await Video.create({
       title,
       description,
-      hashtag: hashtag.split(" ").map((word) => `#${word}`),
+      hashtag: hashtag
+        .split(" ")
+        .map((word) =>
+          !word.trim().startsWith("#") ? `#${word.trim()}` : word.trim()
+        ),
     });
+    console.log(video);
     return res.redirect("/");
   } catch (error) {
     return res.render("upload", {
