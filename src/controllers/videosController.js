@@ -32,7 +32,7 @@ export const upload = (req, res) => {
 export const uploadPost = async (req, res) => {
   const { title, description, hashtag } = req.body;
   try {
-    const video = await Video.create({
+    await Video.create({
       title,
       description,
       hashtag: hashtag
@@ -41,7 +41,6 @@ export const uploadPost = async (req, res) => {
           !word.trim().startsWith("#") ? `#${word.trim()}` : word.trim()
         ),
     });
-    console.log(video);
     return res.redirect("/");
   } catch (error) {
     return res.render("upload", {
