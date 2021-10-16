@@ -1,10 +1,11 @@
 mixin videos(video)
     div 
+        hr
         h4
             a(href=`/videos/${video.id}`)=video.title
-        ul
-            li #{video.likes} #{video.likes === 1 ? "like" : "likes"}
-            li #{video.comments}
-            li Posted #{video.createdAt}. 
-            li #{video.views} #{video.views === 1 ? "view" : "views"}
-
+        p=video.description
+        div
+            span #{video.views} #{video.views === 1 ? "view" : "views"}
+            span #{video.likes} #{video.likes === 1 ? "like" : "likes"}
+        small Posted #{video.createdAt}.
+        hr
