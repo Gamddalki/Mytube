@@ -7,4 +7,7 @@ mixin videos(video)
             span #{video.views} #{video.views === 1 ? "view" : "views"}
             span #{video.likes} #{video.likes === 1 ? "like" : "likes"}
         small Posted #{video.createdAt}.
+        div
+            each hashtag in video.hashtag
+                small=hashtag
         hr

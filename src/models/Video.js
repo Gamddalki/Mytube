@@ -11,8 +11,8 @@ const videoSchema = new mongoose.Schema({
   },
 });
 
-videoSchema.pre("save", async function () {
-  this.hashtag = this.hashtag[0]
+videoSchema.static("formatHashtag", function (hashtag) {
+  return hashtag
     .split(",")
     .map((word) => (!word.startsWith("#") ? `#${word}` : word));
 });
