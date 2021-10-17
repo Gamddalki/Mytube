@@ -7,4 +7,6 @@ block content
         span #{video.likes} #{video.likes === 1 ? "like" : "likes"}
     div
         small=video.description
-    a(href=`${video.id}/edit`) Edit Video &rarr;
+    a(href=`${video.id}/edit`) Edit &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete &rarr;
