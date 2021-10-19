@@ -17,17 +17,26 @@ export const joinPost = async (req, res) => {
       errorMessage: "This username/email is already taken.",
     });
   }
-  await User.create({
-    username,
-    password,
-    name,
-    email,
-    location,
-  });
-  return res.redirect("/login");
+  try {
+    await User.create({
+      username,
+      password,
+      name,
+      email,
+      location,
+    });
+    return res.redirect("/login");
+  } catch (error) {
+    return res.status(400).render("join", {
+      pageTitle: "Join",
+      errorMessage: error._message,
+    });
+  }
 };
 
-export const login = (req, res) => res.send("login");
+export const login = (req, res) => res.render("login");
+
+export const loginPost = (req, res) => res.send("loginPost");
 
 export const logout = (req, res) => res.send("logout");
 
