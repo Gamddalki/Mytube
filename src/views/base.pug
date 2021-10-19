@@ -13,10 +13,16 @@ html(lang="ko")
                         a(href="/search") Search
                     li
                         a(href="/videos/upload") Upload
-                    li
-                        a(href="/login") Login
-                    li
-                        a(href="/join") Join
+                    if loggedIn
+                        li 
+                            a(href="/logout") Logout
+                        li 
+                            a #{loggedInUser.name}
+                    else    
+                        li
+                            a(href="/login") Login
+                        li
+                            a(href="/join") Join
             h1=pageTitle
         main
             block content
