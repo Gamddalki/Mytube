@@ -40,7 +40,7 @@ export const login = (req, res) => res.render("login", { pageTitle: "Login" });
 
 export const loginPost = async (req, res) => {
   const { username, password } = req.body;
-  const exists = await User.findOne({ username });
+  const exists = await User.findOne({ username, socialOnly: false });
   if (!exists) {
     return res.status(400).render("login", {
       pageTitle: "Login",
@@ -89,7 +89,7 @@ export const githubLoginFinish = async (req, res) => {
   ).json();
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
-    const apiUrl = "https://api.github.com/user";
+    const apiUrl = "https://api.github.com";
     const userData = await (
       await fetch(`${apiUrl}/user`, {
         headers: {
@@ -110,23 +110,20 @@ export const githubLoginFinish = async (req, res) => {
     if (!emailObj) {
       return res.redirect("/login");
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = exists;
-      return res.redirect("/");
-    } else {
-      //create an account
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
       const user = await User.create({
         username: userData.login,
         password: "",
-        name: userData.name,
+        name: userData.name ? userData.name : userData.login,
         email: emailObj.email,
         socialOnly: true,
         location: userData.location,
       });
-      return res.redirect("/login");
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
   } else {
     return res.redirect("/login");
   }

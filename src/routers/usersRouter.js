@@ -12,8 +12,8 @@ import {
 const usersRouter = express.Router();
 
 usersRouter.get("/:id(\\d+)", see);
-usersRouter.get("/login/github/start", githubLoginStart);
-usersRouter.get("/login/github/finish", githubLoginFinish);
+usersRouter.get("/github/start", githubLoginStart);
+usersRouter.get("/github/finish", githubLoginFinish);
 usersRouter.get("/logout", logout);
 usersRouter.get("/edit", edit);
 usersRouter.get("/delete", leave);
