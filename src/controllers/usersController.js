@@ -37,6 +37,19 @@ export const joinPost = async (req, res) => {
 
 export const login = (req, res) => res.render("login", { pageTitle: "Login" });
 
+export const githubLoginStart = (req, res) => {
+  const baseUrl = "http://github.com/login/oauth/authorize";
+  const config = {
+    client_id: "42ddbda13dce63393048",
+    scope: "read:user user:email",
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  return res.redirect(finalUrl);
+};
+
+export const githubLoginFinish = (req, res) => {};
+
 export const loginPost = async (req, res) => {
   const { username, password } = req.body;
   const exists = await User.findOne({ username });
