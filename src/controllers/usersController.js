@@ -118,6 +118,7 @@ export const githubLoginFinish = async (req, res) => {
         name: userData.name ? userData.name : userData.login,
         email: emailObj.email,
         socialOnly: true,
+        avatarUrl: userData.avatar_url,
         location: userData.location,
       });
     }
@@ -129,7 +130,10 @@ export const githubLoginFinish = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => res.send("logout");
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 
 export const see = (req, res) => res.send("see");
 
