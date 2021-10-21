@@ -144,7 +144,7 @@ export const edit = (req, res) => {
 export const editPost = async (req, res) => {
   const {
     session: {
-      user: { _id, username: sessionUsername, email: sessionEmail },
+      user: { _id, username: sessionUsername, email: sessionEmail, avatarUrl },
     },
     body: { username, name, email, location },
     file,
@@ -169,13 +169,14 @@ export const editPost = async (req, res) => {
     _id,
     {
       username,
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       location,
     },
     { new: true }
   );
-  res.session.user = updatedUser;
+  req.session.user = updatedUser;
   return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
