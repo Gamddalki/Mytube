@@ -147,6 +147,7 @@ export const editPost = async (req, res) => {
       user: { _id, username: sessionUsername, email: sessionEmail },
     },
     body: { username, name, email, location },
+    file,
   } = req;
   let searchParam = [];
   if (sessionEmail !== email) {
