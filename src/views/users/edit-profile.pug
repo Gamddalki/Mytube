@@ -2,10 +2,11 @@ extends ../base
 
 block content 
     form(method="POST")
-        input(placeholder="id", name="username", type="text", required, Value=loggedInUser.username)
+        input(placeholder="id", name="username", type="text", required, Value=loggedInUser.username, minlength="5")
         input(placeholder="name", name="name", type="text", required, Value=loggedInUser.name)
         input(placeholder="email", name="email", type="email", required, Value=loggedInUser.email)
         input(placeholder="location", name="location", type="text", Value=loggedInUser.location)
         input(type="submit", Value="Save")
-        hr
-        a(href="change-password") Change Password &rarr;
+        if !loggedInUser.socialOnly
+            hr
+            a(href="change-password") Change Password &rarr;
