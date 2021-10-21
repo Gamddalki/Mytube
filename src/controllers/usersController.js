@@ -141,7 +141,39 @@ export const edit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const editPost = (req, res) => {
+export const editPost = async (req, res) => {
+  const {
+    session: {
+      user: { _id, username: sessionUsername, email: sessionEmail },
+    },
+    body: { username, name, email, location },
+  } = req;
+  let searchParam = [];
+  if (sessionEmail !== email) {
+    searchParam.push({ email });
+  }
+  if (sessionUsername !== username) {
+    searchParam.push({ username });
+  }
+  if (searchParam.length > 0) {
+    const findUser = await User.findOne({ $or: searchParam });
+    if (findUser && findUser._id.toString() !== _id) {
+      return res.status(400).render("edit-profile", {
+        pageTitle: "Edit Profile",
+        errorMessage: "This username/email is already taken.",
+      });
+    }
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      username,
+      name,
+      email,
+      location,
+    },
+    { new: true }
+  );
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
