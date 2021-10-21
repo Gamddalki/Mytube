@@ -8,6 +8,8 @@ import {
   edit,
   editPost,
   leave,
+  changePassword,
+  changePasswordPost,
 } from "../controllers/usersController";
 
 import { protectorMiddleware } from "../middlewares";
@@ -20,6 +22,11 @@ usersRouter.get("/github/start", publicOnlyMiddleware, githubLoginStart);
 usersRouter.get("/github/finish", publicOnlyMiddleware, githubLoginFinish);
 usersRouter.get("/logout", protectorMiddleware, logout);
 usersRouter.route("/edit").all(protectorMiddleware).get(edit).post(editPost);
+usersRouter
+  .route("/change-password")
+  .all(protectorMiddleware)
+  .get(changePassword)
+  .post(changePasswordPost);
 usersRouter.get("/delete", protectorMiddleware, leave);
 
 export default usersRouter;

@@ -1,4 +1,4 @@
-extends base
+extends ../base
 
 block content 
     form(method="POST")
@@ -7,3 +7,5 @@ block content
         input(placeholder="email", name="email", type="email", required, Value=loggedInUser.email)
         input(placeholder="location", name="location", type="text", Value=loggedInUser.location)
         input(type="submit", Value="Save")
+        hr
+        a(href="change-password") Change Password &rarr;

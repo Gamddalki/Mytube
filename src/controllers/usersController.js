@@ -138,7 +138,7 @@ export const logout = (req, res) => {
 export const see = (req, res) => res.send("see");
 
 export const edit = (req, res) => {
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
 export const editPost = async (req, res) => {
@@ -158,7 +158,7 @@ export const editPost = async (req, res) => {
   if (searchParam.length > 0) {
     const findUser = await User.findOne({ $or: searchParam });
     if (findUser && findUser._id.toString() !== _id) {
-      return res.status(400).render("edit-profile", {
+      return res.status(400).render("users/edit-profile", {
         pageTitle: "Edit Profile",
         errorMessage: "This username/email is already taken.",
       });
@@ -174,7 +174,16 @@ export const editPost = async (req, res) => {
     },
     { new: true }
   );
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  res.session.user = updatedUser;
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
+};
+
+export const changePassword = (req, res) => {
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+
+export const changePasswordPost = (req, res) => {
+  return res.redirect("/:id(\\d+)");
 };
 
 export const leave = (req, res) => res.send("Users Delete");
