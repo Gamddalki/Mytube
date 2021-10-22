@@ -20,14 +20,13 @@ export const search = async (req, res) => {
 };
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id);
+  const video = await (await Video.findById(id)).populate("owner");
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   return res.render("videos/watch", {
     pageTitle: `Watch | ${video.title}`,
     video,
-    owner,
   });
 };
 
