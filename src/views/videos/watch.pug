@@ -4,10 +4,13 @@ block content
     video(src="/"+video.fileUrl, controls)
     h2=video.title
     div
+        small=owner.name
+    div
         span #{video.views} #{video.views === 1 ? "view" : "views"}
         span #{video.likes} #{video.likes === 1 ? "like" : "likes"}
     div
         small=video.description
-    a(href=`${video.id}/edit`) Edit &rarr;
-    br
-    a(href=`${video.id}/delete`) Delete &rarr;
+    if String(video.owner) === String(loggedInUser._id)
+        a(href=`${video.id}/edit`) Edit &rarr;
+        br
+        a(href=`${video.id}/delete`) Delete &rarr;

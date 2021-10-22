@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/User";
 
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ likes: "desc" });
@@ -26,6 +27,7 @@ export const watch = async (req, res) => {
   return res.render("videos/watch", {
     pageTitle: `Watch | ${video.title}`,
     video,
+    owner,
   });
 };
 
@@ -64,6 +66,9 @@ export const upload = (req, res) => {
 };
 
 export const uploadPost = async (req, res) => {
+  const {
+    user: { _id },
+  } = req.session;
   const { path: fileUrl } = req.file;
   const { title, description, hashtag } = req.body;
   try {
@@ -72,6 +77,7 @@ export const uploadPost = async (req, res) => {
       fileUrl,
       description,
       hashtag: Video.formatHashtag(hashtag),
+      owner: _id,
     });
     return res.redirect("/");
   } catch (error) {
