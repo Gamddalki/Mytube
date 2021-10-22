@@ -20,7 +20,7 @@ import {
 
 const usersRouter = express.Router();
 
-usersRouter.get("/:id(\\d+)", see);
+usersRouter.get("/:id", see);
 usersRouter.get("/github/start", publicOnlyMiddleware, githubLoginStart);
 usersRouter.get("/github/finish", publicOnlyMiddleware, githubLoginFinish);
 usersRouter.get("/logout", protectorMiddleware, logout);

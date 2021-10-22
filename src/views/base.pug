@@ -17,7 +17,7 @@ html(lang="ko")
                         li 
                             a(href="/users/logout") Logout
                         li 
-                            a(href="/users/edit") #{loggedInUser.name}
+                            a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}
                     else    
                         li
                             a(href="/login") Login
