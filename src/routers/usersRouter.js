@@ -12,8 +12,11 @@ import {
   changePasswordPost,
 } from "../controllers/usersController";
 
-import { protectorMiddleware, uploadFiles } from "../middlewares";
-import { publicOnlyMiddleware } from "../middlewares";
+import {
+  protectorMiddleware,
+  publicOnlyMiddleware,
+  avatarUpload,
+} from "../middlewares";
 
 const usersRouter = express.Router();
 
@@ -25,7 +28,7 @@ usersRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(edit)
-  .post(uploadFiles.single("avatar"), editPost);
+  .post(avatarUpload.single("avatar"), editPost);
 usersRouter
   .route("/change-password")
   .all(protectorMiddleware)

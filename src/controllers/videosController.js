@@ -23,7 +23,10 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
-  return res.render("watch", { pageTitle: `Watch | ${video.title}`, video });
+  return res.render("videos/watch", {
+    pageTitle: `Watch | ${video.title}`,
+    video,
+  });
 };
 
 export const edit = async (req, res) => {
@@ -57,20 +60,22 @@ export const remove = async (req, res) => {
 };
 
 export const upload = (req, res) => {
-  return res.render("upload", { pageTitle: "Upload" });
+  return res.render("videos/upload", { pageTitle: "Upload" });
 };
 
 export const uploadPost = async (req, res) => {
+  const { path: fileUrl } = req.file;
   const { title, description, hashtag } = req.body;
   try {
     await Video.create({
       title,
+      fileUrl,
       description,
       hashtag: Video.formatHashtag(hashtag),
     });
     return res.redirect("/");
   } catch (error) {
-    return res.status(400).render("upload", {
+    return res.status(400).render("videos/upload", {
       pageTitle: "Upload",
       errorMessage: error._message,
     });
