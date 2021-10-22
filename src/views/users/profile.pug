@@ -7,7 +7,7 @@ block content
     //만약에 본인이라면
     hr
     a(href="edit-profile") Edit &rarr;
-    each video in videos 
+    each video in user.videos 
         +videos(video)
     else
         li No video yet.
