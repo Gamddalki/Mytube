@@ -1,4 +1,5 @@
 extends ../base 
+include ../mixins/videos
 
 block content 
     img(src="/"+user.avatarUrl, width="100", height="100")
@@ -6,3 +7,7 @@ block content
     //만약에 본인이라면
     hr
     a(href="edit-profile") Edit &rarr;
+    each video in videos 
+        +videos(video)
+    else
+        li No video yet.
