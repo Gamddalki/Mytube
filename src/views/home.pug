@@ -2,8 +2,8 @@ extends base
 include mixins/videos
 
 block content
-    h4 You can watch trending Videos Here!
-    each video in videos 
-        +videos(video)
-    else
-        li Sorry nothing available.
+    div.video-grid
+        each video in videos 
+            +videos(video)
+        else
+            span.empty__message Sorry nothing found.
