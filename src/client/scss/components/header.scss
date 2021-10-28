@@ -1,0 +1,37 @@
+header {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header__logo {
+    display: flex;
+    align-items: center;
+    i {
+      color: $red;
+      font-size: 28px;
+      margin-right: 2px;
+    }
+    span {
+      color: $black;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      font-optical-sizing: 50px;
+    }
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $black;
+    li {
+      margin-left: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    i {
+      font-size: 16px;
+    }
+  }
+}
