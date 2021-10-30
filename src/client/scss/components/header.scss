@@ -26,7 +26,7 @@ header {
     input {
       all: unset;
       width: 550px;
-      padding: 8px 5px;
+      padding: 8px 10px;
       border-radius: 1px;
       border: 1px solid $gray;
     }
@@ -42,7 +42,7 @@ header {
         font-size: 15px;
       }
       &:hover {
-        background-color: $gray;
+        background-color: $midgray;
       }
     }
   }
