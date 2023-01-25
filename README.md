@@ -1,6 +1,6 @@
 # Mytube
 
-<div align=center>
+<div>
 
   ![PUG](https://img.shields.io/badge/pug-A86454.svg?style=for-the-badge&logo=pug&logoColor=white)
   ![SASS](https://img.shields.io/badge/sass-CC6699.svg?style=for-the-badge&logo=sass&logoColor=white)
